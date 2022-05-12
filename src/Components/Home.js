@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { fs } from '../Config/Config';
+import { Cart } from './Cart';
 import { Navbar } from './Navbar';
 import { Products } from './Products';
 
@@ -31,7 +32,7 @@ export const Home = () => {
         Product=product;
         Product['qty']=1;
         Product['TotalProductPrice'] = Product.qty*Product.Price;
-        fs.collection('Cart ').doc(product.ID).set(Product).then(()=>{
+        fs.collection('Cart').doc(product.ID).set(Product).then(()=>{
             console.log('Succesfully Added');
         })
     }
@@ -43,6 +44,7 @@ export const Home = () => {
                     <h1 className='text-center'> Products </h1>
                     <div>
                         <Products products={products} addToCart = {addToCart}/>
+                        <Cart/>
                     </div>
                 </div>
             )}
